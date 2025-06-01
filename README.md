@@ -149,5 +149,94 @@ This method is more generic and works across most Linux distributions.
 
 After either method, verify the installation by opening a new terminal and running:
 
-```bash
+```
 terraform --version
+```
+
+## For installation on Windows and Mac follow [document](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
+# Terraform Workflow: init, plan, apply, destroy
+
+This section explains the fundamental steps in the Terraform workflow.
+
+## 1. `terraform init`
+
+The `terraform init` command initializes your Terraform working directory. It's the **first command** to run.
+
+**Functionality:**
+
+* Initializes the configured backend for storing Terraform state.
+* Downloads necessary provider plugins based on your configuration.
+* Sets up any modules referenced in your configuration.
+
+**Usage:**
+
+```
+terraform init
+```
+## 2. `terraform plan`
+The terraform plan command generates an execution plan. It compares the current state with your configuration to determine the necessary actions.
+
+Functionality:
+
+Identifies resources to be created, modified, or deleted.
+Outputs a detailed plan of these actions for your review.
+Usage:
+
+
+```
+terraform plan
+```
+To save the plan for later application:
+
+
+```
+terraform plan -out=tfplan
+```
+
+## 3. `terraform apply`
+The terraform apply command executes the actions outlined in the execution plan, making the desired changes to your infrastructure.
+
+Functionality:
+
+Interacts with providers to provision or modify resources.
+Updates the Terraform state file upon successful application.
+Usage:
+
+To apply directly:
+
+
+```
+terraform apply
+```
+
+Terraform will prompt for confirmation.
+
+To apply a saved plan:
+
+
+```
+terraform apply "tfplan"
+```
+## 4. `terraform destroy`
+The terraform destroy command is used to tear down the infrastructure managed by Terraform.
+
+Functionality:
+
+Identifies all resources in the current state.
+Deletes these resources through the respective providers.
+Updates the state file to reflect the destruction.
+Usage:
+
+
+```
+terraform destroy
+```
+Terraform will prompt for confirmation. To bypass this (use with caution):
+
+
+```
+terraform destroy -auto-approve
+```
+
+These commands are the core of the Terraform workflow, used to provision, manage, and decommission infrastructure.
